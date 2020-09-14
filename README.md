@@ -1,2 +1,2 @@
 # VBA-Challenge
-Excel VBA Challenge assignment
+Analysis of stock markets using Excel VBA. 
