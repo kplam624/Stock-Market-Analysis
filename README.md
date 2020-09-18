@@ -15,3 +15,8 @@ The ticker symbol, the yearly change, the percent change  and the total stock vo
 
 # Submission
 Within the submission foldier, contains the final iteration of script along with screenshots of the script being run on the excel file.
+
+
+
+
+![2014 Stock Image](Submission/2014_stock.png)
