@@ -9,12 +9,13 @@ The columns within the excel file are in order. The Ticker Symbol, The Open Date
 Another excel file is added for the first iteration of the script. A .txt file is added as well to demonstrate earlier ideas.
 
 The goal is to create a script using Excel VBA to analyse Stock Market data.
-With the data in the given excel file, the script creates a summary table with the following:
 
-  *The ticker symbol, 
-  *the yearly change, 
-  *the percent change 
+*With the given excel file, the script creates a summary table with the following:
+  *The ticker symbol
+  *the yearly change
+  *the percent change
   *total stock volume
+*Good times
 
 # Submission
 Within the submission foldier, contains the final iteration of script along with screenshots of the script being run on the excel file.
