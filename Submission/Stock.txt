@@ -1,0 +1,167 @@
+Attribute VB_Name = "Module2"
+Sub stocks()
+
+'Initialize variables
+
+
+Dim ticker As String
+Dim last_row As Long
+Dim i As Long
+Dim j As Integer
+Dim ws As Worksheet
+
+'Statistical variables
+Dim total_volume As Variant
+Dim open_date As Double
+Dim closed_date As Double
+Dim yearly_change As Double
+Dim percent_change As Variant
+
+'For the superlatives
+Dim suptick1 As String
+Dim suptick2 As String
+Dim suptick3 As String
+
+'Superlative groups
+Dim Greatest_change As Double
+Dim Lowest_change As Double
+Dim ltotvol As Variant
+
+
+'To run on all worksheets
+For Each ws In Worksheets
+
+'Headers for excel sheets
+ws.Range("I1").Value = "Ticker"
+ws.Range("J1").Value = "Yearly Change"
+ws.Range("K1").Value = "Percent Change"
+ws.Range("L1").Value = "Total Volume"
+ws.Range("O1").Value = "Ticker"
+ws.Range("P1").Value = "Values"
+
+'Sets the last row for each worksheet --> For the count
+    last_row = ws.UsedRange.Rows.count
+    
+'Initial values
+    total_volume = 0
+    open_date = ws.Cells(2, 3).Value
+    close_date = 0
+    
+'Rows of the Summary row count
+    j = 2
+
+'Number crunching
+    For i = 2 To last_row
+    
+'Finding the total volume
+        If ws.Cells(i, 1).Value = ws.Cells(i + 1, 1).Value Then
+            total_volume = total_volume + ws.Cells(i, 7)
+ 
+'Inserting the data when new ticker value begins
+        Else
+            total_volume = total_volume + ws.Cells(i, 7).Value
+            close_date = ws.Cells(i, 6).Value
+            yearly_change = close_date - open_date
+
+'Calculating percent change and dealing with cases
+'Case that a stock opens the year at zero
+'Financially this value would be negligable in this case 0
+            If open_date = 0 Then
+            percent_change = 0
+            Else
+            percent_change = yearly_change / open_date
+            
+            End If
+            
+'Ticker value
+            ws.Cells(j, 9).Value = ws.Cells(i, 1)
+'Yearly Change
+            ws.Cells(j, 10).Value = yearly_change
+'Percent Change
+            ws.Cells(j, 11).Value = percent_change
+'Total Volume
+            ws.Cells(j, 12).Value = total_volume
+'Add 1 to the summary row count
+            j = j + 1
+'Reset Open date
+            open_date = ws.Cells(i + 1, 3).Value
+'Reset total volume
+            total_volume = 0
+        End If
+    Next i
+    
+'Inserts the superlatives
+    Greatest_change = ws.Cells(2, 11).Value
+    Lowest_change = ws.Cells(2, 11).Value
+    ltotvol = ws.Cells(2, 12).Value
+    
+'Calculates the superlatives
+
+    For i = 2 To last_row
+'Searches for largest total volume
+        If ws.Cells(i, 12).Value > ltotvol Then
+        ltotvol = ws.Cells(i, 12).Value
+        suptick1 = ws.Cells(i, 9).Value
+        End If
+
+'Searches for greatest change
+        If ws.Cells(i, 11).Value > Greatest_change Then
+        Greatest_change = ws.Cells(i, 11).Value
+        suptick2 = ws.Cells(i, 9).Value
+        End If
+
+'Searches for lowest change
+'Prevents the code from using empty cells as values
+        If IsEmpty(ws.Cells(i, 11).Value) = True Then
+        i = last_row
+
+        ElseIf Lowest_change > ws.Cells(i, 11).Value Then
+        Lowest_change = ws.Cells(i, 11).Value
+        suptick3 = ws.Cells(i, 9).Value
+        End If
+    
+    Next i
+    
+'Superlatives
+    ws.Range("N2").Value = "Greatest Percent Change"
+    ws.Range("N3").Value = "Lowest Percent Change"
+    ws.Range("N4").Value = "Largest Total Volume"
+    
+'Tickers that go with the superlatives
+    ws.Range("O2").Value = suptick2
+    ws.Range("O3").Value = suptick3
+    ws.Range("O4").Value = suptick1
+
+'Values of the superlatives
+    ws.Range("P2").Value = Greatest_change
+    ws.Range("P3").Value = Lowest_change
+    ws.Range("P4").Value = ltotvol
+    
+    
+'Formatting
+    ws.Columns("I:P").AutoFit
+
+'Color Formatting
+    For i = 2 To last_row
+        If ws.Cells(i, 10) < 0 Then
+        ws.Cells(i, 10).Interior.ColorIndex = 3
+        
+        ElseIf ws.Cells(i, 10) > 0 Then
+        ws.Cells(i, 10).Interior.ColorIndex = 4
+        
+        End If
+        
+'Number Formatting
+    ws.Cells(i, 11).NumberFormat = "0.00%"
+    ws.Cells(i, 12).NumberFormat = "$###,###,###,###"
+    
+    Next i
+'Formatting the Superlatives
+    ws.Range("P2").NumberFormat = "0.00%"
+    ws.Range("P3").NumberFormat = "0.00%"
+    ws.Range("P4").NumberFormat = "$###,###,###,###"
+
+'Moves to next worksheet in the file
+Next ws
+
+End Sub
