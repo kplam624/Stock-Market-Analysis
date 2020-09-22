@@ -11,7 +11,7 @@ Another excel file is added for the first iteration of the script. A .txt file i
 The goal is to create a script using Excel VBA to analyse Stock Market data.
 
 # Submission
-Within the submission foldier, contains the final iteration of the script along with screenshots of the script being run on an excel file containing mock stock information over 3 years.
+Within the submission folder, contains the final iteration of the script along with screenshots of the script being run on an excel file containing mock stock information over 3 years.
 
 * With the given excel file, the script creates a summary table with the following:
   * The ticker symbol
