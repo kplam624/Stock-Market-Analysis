@@ -24,7 +24,10 @@ Within the submission foldier, contains the final iteration of the script along 
   * Lowest Percent Change
   * Largest Stock Volume
 
+The script is also created to run over multiple excel worksheets in a workbook.
+
 The script is written on a .txt file
+Below are the screen shots for the analysis.
 
 The 2014 Stock Analysis
 ![2014 Stock Image](Submission/2014_stock.png)
