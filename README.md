@@ -22,7 +22,7 @@ Within the submission foldier, contains the final iteration of the script along 
 * It also includes additional superlative information for the 3 years
   * Greatest Percent Change
   * Lowest Percent Change
-  * Largest Stock Volume
+  * Largest Total Stock Volume
 
 The script is also created to run over multiple excel worksheets in a workbook.
 
