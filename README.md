@@ -1,4 +1,4 @@
-# VBA-Challenge
+# Stock Market Analysis
 Create a script using Excel VBA to analyze mock stock market data. Complete analysis with a summary table added to the file.
 
 # Test Data
